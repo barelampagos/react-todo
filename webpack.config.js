@@ -19,9 +19,8 @@ module.exports = {
 		filename: './public/bundle.js'
 	},
 	resolve: {
-		// Where should this happen?
 		root: __dirname,
-		// Define alias for require's --> require('Greeter')
+		modulesDirectories: ['node_modules', './app/components'],
 		alias: {
 			auth: 'app/api/auth.jsx',
 			applicationStyles: 'app/styles/app.scss'

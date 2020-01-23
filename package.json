@@ -1,7 +1,7 @@
 {
-	"name": "react-boilerplate-v3",
+	"name": "react-todo",
 	"version": "1.0.0",
-	"description": "React boilerplate with Foundation, CSS, and Karma.",
+	"description": "React Todo Application.",
 	"main": "index.js",
 	"scripts": {
 		"test": "karma start",

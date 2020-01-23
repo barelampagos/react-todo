@@ -1,1 +1,1 @@
-React boilerplate with Foundation, CSS, and Karma.
+React Todo Application.
