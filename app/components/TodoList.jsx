@@ -8,7 +8,7 @@ var TodoList = React.createClass({
 		var renderTodos = () => {
 			return todos.map(todo => {
 				// ... spread syntax allows us to pass all attributes as it's own prop
-				return <Todo key={todo.id} {...todo} />;
+				return <Todo key={todo.id} {...todo} onToggle={this.props.onToggle} />;
 			});
 		};
 
