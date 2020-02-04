@@ -20,9 +20,8 @@ module.exports = {
 	},
 	resolve: {
 		root: __dirname,
-		modulesDirectories: ['node_modules', './app/components'],
+		modulesDirectories: ['node_modules', './app/components', './app/api'],
 		alias: {
-			auth: 'app/api/auth.jsx',
 			applicationStyles: 'app/styles/app.scss'
 		},
 		// List of file extensions we should be able to process
