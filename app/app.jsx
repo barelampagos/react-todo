@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var { Provider } = require('react-redux');
 var { Route, Router, IndexRoute, hashHistory } = require('react-router');
 
 var TodoApp = require('TodoApp');
@@ -22,4 +23,10 @@ $(document).foundation();
 require('style!css!sass!applicationStyles');
 
 // JSX Code --> JS XML
-ReactDOM.render(<TodoApp></TodoApp>, document.getElementById('app'));
+ReactDOM.render(
+	// Provider Component - enables any children components to have access to the store
+	<Provider store={store}>
+		<TodoApp />
+	</Provider>,
+	document.getElementById('app')
+);
