@@ -1,3 +1,6 @@
+import firebase, { firebaseRef } from 'app/firebase/';
+import moment from 'moment';
+
 // ACTION GENERATORS
 export var setSearchText = searchText => {
 	return {
@@ -12,10 +15,10 @@ export var toggleShowCompleted = () => {
 	};
 };
 
-export var addTodo = text => {
+export var addTodo = todo => {
 	return {
 		type: 'ADD_TODO',
-		text
+		todo
 	};
 };
 
@@ -23,6 +26,31 @@ export var toggleTodo = id => {
 	return {
 		type: 'TOGGLE_TODO',
 		id
+	};
+};
+
+export var startAddTodo = text => {
+	return (dispatch, getState) => {
+		// Create TODO
+		var todo = {
+			text,
+			completed: false,
+			createdAt: moment().unix(),
+			completedAt: null
+		};
+
+		// Save on firebase
+		var todoRef = firebaseRef.child('todos').push(todo);
+
+		// Dispatch TODO to browser
+		return todoRef.then(() => {
+			dispatch(
+				addTodo({
+					...todo,
+					id: todoRef.key
+				})
+			);
+		});
 	};
 };
 
