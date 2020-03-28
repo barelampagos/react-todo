@@ -1,4 +1,4 @@
 node_modules
-app/api/auth.jsx
+config/
 playground
 public/bundle.js

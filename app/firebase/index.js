@@ -1,13 +1,11 @@
 import firebase from 'firebase';
-import auth from 'auth';
 
 try {
-	// Your web app's Firebase configuration
 	var firebaseConfig = {
-		apiKey: auth.firebaseAuth,
-		authDomain: 'br-todo-app.firebaseapp.com',
-		databaseURL: 'https://br-todo-app.firebaseio.com',
-		storageBucket: 'br-todo-app.appspot.com'
+		apiKey: process.env.API_KEY,
+		authDomain: process.env.AUTH_DOMAIN,
+		databaseURL: process.env.DATABASE_URL,
+		storageBucket: process.env.STORAGE_BUCKET
 	};
 
 	// Initialize Firebase
