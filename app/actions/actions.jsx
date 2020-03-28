@@ -22,6 +22,34 @@ export var addTodo = todo => {
 	};
 };
 
+export var addTodos = todos => {
+	return {
+		type: 'ADD_TODOS',
+		todos
+	};
+};
+
+export var startAddTodos = () => {
+	return (dispatch, getState) => {
+		var todoRef = firebaseRef.child('todos');
+
+		return todoRef.once('value').then(snapshot => {
+			// Give us all ID keys
+			var todos = snapshot.val() || {};
+			var parsedTodos = [];
+
+			Object.keys(todos).forEach(key => {
+				parsedTodos.push({
+					id: key,
+					...snapshot.val()[key]
+				});
+			});
+
+			dispatch(addTodos(parsedTodos));
+		});
+	};
+};
+
 export var updateTodo = (id, updates) => {
 	return {
 		type: 'UPDATE_TODO',
@@ -67,12 +95,5 @@ export var startAddTodo = text => {
 				})
 			);
 		});
-	};
-};
-
-export var addTodos = todos => {
-	return {
-		type: 'ADD_TODOS',
-		todos
 	};
 };
