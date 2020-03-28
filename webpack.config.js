@@ -1,6 +1,9 @@
 var webpack = require('webpack');
 var path = require('path');
 
+// Will be 'production' on heroku
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 module.exports = {
 	// Entry point of application
 	entry: [
@@ -12,7 +15,14 @@ module.exports = {
 		// Set of KV pairs: Module, Variable name
 		jquery: 'jQuery'
 	},
-	plugins: [new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery' })],
+	plugins: [
+		new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery' }),
+		new webpack.optimize.UglifyJsPlugin({
+			compressor: {
+				warnings: false
+			}
+		})
+	],
 	output: {
 		// Output of bundled file
 		path: __dirname, // Node gives us current dir with __dirname
@@ -52,5 +62,7 @@ module.exports = {
 			path.resolve(__dirname, './node_modules/foundation-sites/scss')
 		]
 	},
-	devtool: 'inline-source-map'
+	devtool:
+		// Only make source maps locally
+		process.env.NODE_ENV == 'production' ? undefined : 'inline-source-map'
 };
